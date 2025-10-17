@@ -15,7 +15,7 @@ free -h
 ulimit -a
 
 #I moved this file so you might have to cd to the top in order to run it correctly
-cd /Users/katiefrields/climsim/E3SM/climsim_scripts
+cd /global/homes/k/kfrields/climsim/E3SM/climsim_scripts/
 
 podman-hpc run  --rm -it --volume="/pscratch/sd/k/kfrields/climsim-online-data/inputdata:/storage/inputdata" \
     --volume "/pscratch/sd/k/kfrields/climsim-online-data/shared_e3sm:/storage/shared_e3sm" \
