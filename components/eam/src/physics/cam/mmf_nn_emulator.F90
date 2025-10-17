@@ -199,6 +199,42 @@ select case (to_lower(trim(cb_nn_var_combo)))
         end do
       end if
 
+    case('v2_rh_mc')
+          input(:ncol,0*pver+1:1*pver) = state%t(1:ncol,1:pver)          ! state_t
+          input(:ncol,1*pver+1:2*pver) = state%q(1:ncol,1:pver,1)        ! state_q0001
+          input(:ncol,2*pver+1:3*pver) = state%q(1:ncol,1:pver,ixcldliq)
+          input(:ncol,3*pver+1:4*pver) = state%q(1:ncol,1:pver,ixcldice)
+          input(:ncol,4*pver+1:5*pver) = state%u(1:ncol,1:pver)          ! state_u
+          input(:ncol,5*pver+1:6*pver) = state%v(1:ncol,1:pver)          ! state_v
+          !gas
+          input(:ncol,6*pver+1:7*pver) = ozone(:ncol,1:pver)            ! pbuf_ozone
+          input(:ncol,7*pver+1:8*pver) = ch4(:ncol,1:pver)             ! pbuf_CH4
+          input(:ncol,8*pver+1:9*pver) = n2o(:ncol,1:pver)             ! pbuf_N2O
+          ! 2d vars e.g., ps, solin
+          input(:ncol,9*pver+1) = state%ps(1:ncol)                      ! state_ps
+          input(:ncol,9*pver+2) = solin(1:ncol)                         ! pbuf_SOLIN
+          input(:ncol,9*pver+3) = lhflx(1:ncol)                         ! pbuf_LHFLX
+          input(:ncol,9*pver+4) = shflx(1:ncol)                         ! pbuf_SHFLX
+          input(:ncol,9*pver+5) = taux(1:ncol)                          ! pbuf_TAUX
+          input(:ncol,9*pver+6) = tauy(1:ncol)                          ! pbuf_TAUY
+          input(:ncol,9*pver+7) = coszrs(1:ncol)                        ! pbuf_COSZRS
+          input(:ncol,9*pver+8) = cam_in%ALDIF(:ncol)                   ! cam_in_ALDIF
+          input(:ncol,9*pver+9) = cam_in%ALDIR(:ncol)                   ! cam_in_ALDIR
+          input(:ncol,9*pver+10) = cam_in%ASDIF(:ncol)                  ! cam_in_ASDIF
+          input(:ncol,9*pver+11) = cam_in%ASDIR(:ncol)                  ! cam_in_ASDIR
+          input(:ncol,9*pver+12) = cam_in%LWUP(:ncol)                   ! cam_in_LWUP
+          input(:ncol,9*pver+13) = cam_in%ICEFRAC(:ncol)                ! cam_in_ICEFRAC
+          input(:ncol,9*pver+14) = cam_in%LANDFRAC(:ncol)               ! cam_in_LANDFRAC
+          input(:ncol,9*pver+15) = cam_in%OCNFRAC(:ncol)                ! cam_in_OCNFRAC
+          input(:ncol,9*pver+16) = cam_in%SNOWHICE(:ncol)               ! cam_in_SNOWHICE
+          input(:ncol,9*pver+17) = cam_in%SNOWHLAND(:ncol)              ! cam_in_SNOWHLAND
+          ! RH conversion
+          if (input_rh) then ! relative humidity conversion for input
+            do i = 1,ncol
+              do k=1,pver
+                ! Port of tom's RH =  Rv*p*qv/(R*esat(T))
+                rh_loc = 461.*state%pmid(i,k)*state%q(i,k,1)/(287.*tom_esat(state%t(i,k))) ! note function tom_esat below refercing SAM's sat.F90
+
     case('v4')
       input(:ncol,0*pver+1:1*pver) = state%t(1:ncol,1:pver)          ! state_t
       input(:ncol,1*pver+1:2*pver) = state%q(1:ncol,1:pver,1)        ! state_q0001
