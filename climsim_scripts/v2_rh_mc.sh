@@ -21,5 +21,6 @@ podman-hpc run  --rm -it --volume="/pscratch/sd/k/kfrields/climsim-online-data/i
     --volume "/pscratch/sd/k/kfrields/climsim-online-data/scratch:/scratch" \
     --volume "/pscratch/sd/k/kfrields/hugging/E3SM-MMF_saved_models:/hugging" \
     --volume "/dev/shm:/dev/shm" \
-    climsim:podman example_job_submit_nnwrapper_v2.py
+    -w /workspace \
+    climsim:podman python example_job_submit_nnwrapper_v2.py
 
