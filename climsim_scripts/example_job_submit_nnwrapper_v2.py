@@ -10,9 +10,9 @@ import os, datetime, subprocess as sp, numpy as np
 import shutil, glob
 newcase,config,build,clean,submit,continue_run = False,False,False,False,False,False
 
-acct = os.environ.get("MMF_NN_SLURM_ACCOUNT", "m4331")
+acct = os.environ.get("MMF_NN_SLURM_ACCOUNT", "m4334")
 
-case_prefix = 'example_job_submit_nnwrapper_v2'
+case_prefix = 'Unet_v2_rh_mc'
 # exe_refcase = ''
 
 top_dir  = "/climsim"
@@ -67,7 +67,7 @@ if debug_mode: case_list.append('debug')
 case='.'.join(case_list)
 #---------------------------------------------------------------------------------------------------
 # MMF_NN_EMULATOR
-torch_model = '/storage/shared_e3sm/saved_models/wrapper/v2_mlp_wrapper.pt'
+torch_model = '/hugging/wrapped_unet_test_1.pt'
 inputlength = 557
 outputlength = 368
 cb_nn_var_combo = 'v2'
@@ -89,7 +89,7 @@ if 'MMF_ML_TRAINING' in user_cpp:
 #---------------------------------------------------------------------------------------------------
 print('\n  case : '+case+'\n')
 
-if 'CPU' in arch : max_mpi_per_node,atm_nthrds  =  8,1 ; max_task_per_node = 8
+if 'CPU' in arch : max_mpi_per_node,atm_nthrds  =  2,4 ; max_task_per_node = 8
 if 'GPU' in arch : max_mpi_per_node,atm_nthrds  =  2,8 ; max_task_per_node = 16
 atm_ntasks = max_mpi_per_node*num_nodes
 #---------------------------------------------------------------------------------------------------
@@ -151,7 +151,7 @@ cb_nn_var_combo = '{cb_nn_var_combo}'
 input_rh        = {input_rh}
 cb_torch_model  = '{torch_model}'
 cb_spinup_step = {cb_spinup_step}
-cb_partial_coupling = {cb_partial_coupling}
+cb_partial_coupling = '{cb_partial_coupling}'
 cb_partial_coupling_vars = 'ptend_t', 'ptend_q0001','ptend_q0002','ptend_q0003', 'ptend_u', 'ptend_v', 'cam_out_PRECC', 'cam_out_PRECSC', 'cam_out_NETSW', 'cam_out_FLWDS', 'cam_out_SOLS', 'cam_out_SOLL', 'cam_out_SOLSD', 'cam_out_SOLLD' 
 cb_do_ramp = {cb_do_ramp}
 cb_ramp_option = '{cb_ramp_option}'
