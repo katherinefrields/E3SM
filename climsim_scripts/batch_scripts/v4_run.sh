@@ -15,10 +15,11 @@ free -h
 ulimit -a
 
 #I moved this file so you might have to cd to the top in order to run it correctly
+cd ..
 
 podman-hpc run  --rm -it --volume="/pscratch/sd/k/kfrields/climsim-online-data/inputdata:/storage/inputdata" \
     --volume "/pscratch/sd/k/kfrields/climsim-online-data/shared_e3sm:/storage/shared_e3sm" \
     --volume "/pscratch/sd/k/kfrields/climsim-online-data/scratch:/scratch" \
     --volume "/pscratch/sd/k/kfrields/hugging/E3SM-MMF_saved_models:/hugging" \
     --volume "/dev/shm:/dev/shm" \
-    climsim:podman python E3SM/climsim_scripts/example_job_submit_nnwrapper_v4_constrained.py
+    climsim:podman example_job_submit_nnwrapper_v4_constrained.py
