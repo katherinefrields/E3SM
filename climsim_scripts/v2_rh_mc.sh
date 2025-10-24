@@ -1,8 +1,8 @@
 #!/bin/bash
 #SBATCH -A m4334
 #SBATCH -C cpu
-#SBATCH -q regular
-#SBATCH -t 06:00:00
+#SBATCH -q debug
+#SBATCH -t 00:05:00
 #SBATCH --ntasks-per-node 32
 #SBATCH --cpus-per-task 1
 #SBATCH --mem=128G 

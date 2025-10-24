@@ -74,7 +74,7 @@ cb_nn_var_combo = 'v2'
 input_rh = '.true.'
 cb_spinup_step = 5
 cb_strato_water_constraint = '.false.' # set .true. to use stratospheric water constraint to remove all stratospheric clouds and set dqv/dt in strato to 0
-cb_partial_coupling = '.false.'
+#cb_partial_coupling = .false.
 cb_do_ramp = '.false.'
 cb_ramp_option = 'step'
 cb_ramp_factor = 1.0
@@ -82,10 +82,10 @@ cb_ramp_step_0steps = 80
 cb_ramp_step_1steps = 10
 
 # check if MMF_ML_TRAINING is in user_cpp, then either no -DMMF_NN_EMULATOR or f_cb_partial_coupling need to be true, otherwise raise error
-if 'MMF_ML_TRAINING' in user_cpp:
-   if 'MMF_NN_EMULATOR' in user_cpp:
-      if cb_partial_coupling == '.false.':
-         raise ValueError('If MMF_NN_EMULATOR is used with MMF_ML_TRAINING, cb_partial_coupling must be true.')
+#if 'MMF_ML_TRAINING' in user_cpp:
+#   if 'MMF_NN_EMULATOR' in user_cpp:
+#      if cb_partial_coupling == '.false.':
+#         raise ValueError('If MMF_NN_EMULATOR is used with MMF_ML_TRAINING, cb_partial_coupling must be true.')
 #---------------------------------------------------------------------------------------------------
 print('\n  case : '+case+'\n')
 
@@ -151,7 +151,7 @@ cb_nn_var_combo = '{cb_nn_var_combo}'
 input_rh        = {input_rh}
 cb_torch_model  = '{torch_model}'
 cb_spinup_step = {cb_spinup_step}
-cb_partial_coupling = {cb_partial_coupling}
+cb_partial_coupling = .false.
 cb_partial_coupling_vars = 'ptend_t', 'ptend_q0001','ptend_q0002','ptend_q0003', 'ptend_u', 'ptend_v', 'cam_out_PRECC', 'cam_out_PRECSC', 'cam_out_NETSW', 'cam_out_FLWDS', 'cam_out_SOLS', 'cam_out_SOLL', 'cam_out_SOLSD', 'cam_out_SOLLD' 
 cb_do_ramp = {cb_do_ramp}
 cb_ramp_option = '{cb_ramp_option}'
