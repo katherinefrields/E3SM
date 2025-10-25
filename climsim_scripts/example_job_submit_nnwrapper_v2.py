@@ -43,7 +43,7 @@ debug_mode = False
 dtime = 1200 # set to 0 to use a default value 
 
 #stop_opt,stop_n,resub,walltime = 'nmonths',1, 1, '00:30:00'
-stop_opt,stop_n,resub,walltime = 'nmonths',13, 0,'24:00:00'
+stop_opt,stop_n,resub,walltime = 'nmonths',13, 0,'12:00:00'
 #stop_opt,stop_n,resub,walltime = 'ndays',2, 0,'00:30:00'
 
 ne,npg=4,2;  num_nodes=1  ; grid=f'ne{ne}pg{npg}_ne{ne}pg{npg}'
@@ -89,7 +89,7 @@ if 'MMF_ML_TRAINING' in user_cpp:
 #---------------------------------------------------------------------------------------------------
 print('\n  case : '+case+'\n')
 
-if 'CPU' in arch : max_mpi_per_node,atm_nthrds  =  2,4 ; max_task_per_node = 8
+if 'CPU' in arch : max_mpi_per_node,atm_nthrds  =  32,1 ; max_task_per_node = 32
 if 'GPU' in arch : max_mpi_per_node,atm_nthrds  =  2,8 ; max_task_per_node = 16
 atm_ntasks = max_mpi_per_node*num_nodes
 #---------------------------------------------------------------------------------------------------
