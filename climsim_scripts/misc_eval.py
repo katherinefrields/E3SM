@@ -40,7 +40,7 @@ def main(shared_path, hybrid_path_h0):
                 mean_val = var.mean().compute().item()
                 f.write(f"{name} {var_name}: {mean_val}\n")
 
-                year_data = ds[var_name].values - ds_mmf_ref[var_name].value
+                year_data = ds[var_name].values - ds_mmf_ref[var_name].values
                 averaged_year_data = year_data.mean(axis=(1,2))
                 months = np.arange(1, 13)
                 
