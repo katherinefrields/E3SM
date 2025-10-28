@@ -35,7 +35,7 @@ def main(shared_path, hybrid_path_h0):
                 mean_val = var.mean().compute().item()
                 f.write(f"{name} {var_name}: {mean_val}\n")
 
-                year_data = var[:12].values
+                year_data = var.values
                 months = np.arange(1, 13)
                 
                 # --- Plot variable over time if possible ---
