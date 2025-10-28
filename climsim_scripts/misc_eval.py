@@ -44,15 +44,15 @@ def main(shared_path, hybrid_path_h0):
                 #averaged_year_data = year_data.mean(axis=(1,2))
                 months = np.arange(1, 13)
                 
-                total_weight_sliced = total_weight[:12, :, :]
+                #total_weight_sliced = total_weight[:12, :, :]
                 
-                weighted_year_data = year_data.mean(axis=(1,2)) * total_weight_sliced
+                #weighted_year_data = year_data.mean(axis=(1,2)) * total_weight_sliced
                 
                 
                 # --- Plot variable over time if possible ---
 
                 plt.figure(figsize=(8, 4))
-                plt.plot(months, weighted_year_data, marker='o', linewidth=1)
+                plt.plot(months, year_data, marker='o', linewidth=1)
                 plt.title(f"{name.upper()} - {var_name} over time")
                 plt.xlabel("Time")
                 plt.ylabel(var_name)
