@@ -13,7 +13,12 @@ def main(shared_path, hybrid_path_h0):
     #ds_mmf_c = xr.open_dataset(shared_path + 'h0/1year/mmf_c/mmf_c.eam.h0.0003.nc')
     ds_nn = xr.open_mfdataset(hybrid_path_h0+'*.eam.h0.0003-*.nc', engine='netcdf4')
 
-
+    p_interface = ds_mmf_ref.hyai.values[np.newaxis,:,np.newaxis]*ds_mmf_ref.P0.values + ds_mmf_ref.hybi.values[np.newaxis,:,np.newaxis]*ds_mmf_ref.PS.values[:,np.newaxis,:]
+    dp = p_interface[:,1:61,:] - p_interface[:,0:60,:]
+    area = ds_mmf_ref.area
+    area_weight = area.values[np.newaxis,np.newaxis,:]
+    total_weight = dp*area_weight
+    
     # Ensure the ./figure directory exists before writing
     os.makedirs('./figure', exist_ok=True)
 
@@ -35,13 +40,18 @@ def main(shared_path, hybrid_path_h0):
                 mean_val = var.mean().compute().item()
                 f.write(f"{name} {var_name}: {mean_val}\n")
 
-                year_data = var.values
+                year_data = ds[var_name].values
                 months = np.arange(1, 13)
+                
+                total_weight_sliced = total_weight[:12, :, :]
+                
+                weighted_year_data = year_data * total_weight_sliced
+                
                 
                 # --- Plot variable over time if possible ---
 
                 plt.figure(figsize=(8, 4))
-                plt.plot(months, year_data, marker='o', linewidth=1)
+                plt.plot(months, weighted_year_data, marker='o', linewidth=1)
                 plt.title(f"{name.upper()} - {var_name} over time")
                 plt.xlabel("Time")
                 plt.ylabel(var_name)
