@@ -41,12 +41,12 @@ def main(shared_path, hybrid_path_h0):
                 f.write(f"{name} {var_name}: {mean_val}\n")
 
                 year_data = ds[var_name].values - ds_mmf_ref[var_name].values
-                averaged_year_data = year_data.mean(axis=(1,2))
+                #averaged_year_data = year_data.mean(axis=(1,2))
                 months = np.arange(1, 13)
                 
                 total_weight_sliced = total_weight[:12, :, :]
                 
-                weighted_year_data = averaged_year_data * total_weight_sliced
+                weighted_year_data = year_data.mean(axis=(1,2)) * total_weight_sliced
                 
                 
                 # --- Plot variable over time if possible ---
@@ -63,7 +63,7 @@ def main(shared_path, hybrid_path_h0):
                 plt.close()
 
         # Process each dataset
-        process_dataset(ds_mmf_ref, "mmf_ref")
+        #process_dataset(ds_mmf_ref, "mmf_ref")
         process_dataset(ds_mmf_a, "mmf_a")
         process_dataset(ds_nn, "nn")
         
