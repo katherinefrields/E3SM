@@ -35,25 +35,21 @@ def main(shared_path, hybrid_path_h0):
                 mean_val = var.mean().compute().item()
                 f.write(f"{name} {var_name}: {mean_val}\n")
 
+                year_data = var[:12].values
+                months = np.arange(1, 13)
+                
                 # --- Plot variable over time if possible ---
-                if "time" in var.dims:
-                    # Average over all non-time dimensions
-                    other_dims = [d for d in var.dims if d != "time"]
-                    var_over_time = var.mean(dim=other_dims).compute()
 
-                    # Use real time coordinate
-                    time = var["time"].values
+                plt.figure(figsize=(8, 4))
+                plt.plot(months, year_data, marker='o', linewidth=1)
+                plt.title(f"{name.upper()} - {var_name} over time")
+                plt.xlabel("Time")
+                plt.ylabel(var_name)
+                plt.tight_layout()
 
-                    plt.figure(figsize=(8, 4))
-                    plt.plot(time, var_over_time, marker='o', linewidth=1)
-                    plt.title(f"{name.upper()} - {var_name} over time")
-                    plt.xlabel("Time")
-                    plt.ylabel(var_name)
-                    plt.tight_layout()
-
-                    plot_path = f"./figure/{name}_{var_name}.png"
-                    plt.savefig(plot_path, dpi=150)
-                    plt.close()
+                plot_path = f"./figure/{name}_{var_name}.png"
+                plt.savefig(plot_path, dpi=150)
+                plt.close()
 
         # Process each dataset
         process_dataset(ds_mmf_ref, "mmf_ref")
