@@ -33,10 +33,10 @@ def main(shared_path, hybrid_path_h0):
                 f.write(f"\n=== {name.upper()} means ===\n")
                 # --- Compute and write mean ---
                 #mean_val = var.mean().compute().item()
-                f.write(f"{name} {var_name}: {mean_val}\n")
+                #f.write(f"{name} {var_name}: {mean_val}\n")
 
-                l.write(f'ds var name {ds[var_name].shape}\n')
-                l.write(f'ds ref var name {ds_mmf_ref[var_name].shape}\n')
+                #l.write(f'ds var name {ds[var_name].shape}\n')
+                #l.write(f'ds ref var name {ds_mmf_ref[var_name].shape}\n')
                 
                 monthly_ref_mean = ds_mmf_ref.mean(dim=['lev', 'ncol'])
                 l.write(f'monthly ref mean shape {monthly_ref_mean.dims}\n')
