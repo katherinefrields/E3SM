@@ -24,48 +24,52 @@ def main(shared_path, hybrid_path_h0):
 
     # Define the path for the output file
     output_path = './figure/output.txt'
+    log_output_path = './figure/log.txt'
 
     with open(output_path, "w") as f:
-        def process_dataset(ds, name):
-            f.write(f"\n=== {name.upper()} means ===\n")
+        with open(log_output_path, "w") as l:
+            def process_dataset(ds, name):
+                f.write(f"\n=== {name.upper()} means ===\n")
 
-            for var_name in ds.data_vars:
-                var = ds[var_name]
+                for var_name in ds.data_vars:
+                    var = ds[var_name]
 
-                # Skip non-numeric variables
-                if not np.issubdtype(var.dtype, np.number):
-                    continue
+                    # Skip non-numeric variables
+                    if not np.issubdtype(var.dtype, np.number):
+                        continue
 
-                # --- Compute and write mean ---
-                mean_val = var.mean().compute().item()
-                f.write(f"{name} {var_name}: {mean_val}\n")
+                    # --- Compute and write mean ---
+                    mean_val = var.mean().compute().item()
+                    f.write(f"{name} {var_name}: {mean_val}\n")
 
-                year_data = ds[var_name].values - ds_mmf_ref[var_name].values
-                #averaged_year_data = year_data.mean(axis=(1,2))
-                months = np.arange(1, 13)
-                
-                #total_weight_sliced = total_weight[:12, :, :]
-                
-                #weighted_year_data = year_data.mean(axis=(1,2)) * total_weight_sliced
-                
-                
-                # --- Plot variable over time if possible ---
+                    l.write(f'ds var name {ds[var_name].shape}\n')
+                    l.write(f'ds ref var name {ds_mmf_ref[var_name].shape}\n')
+                    year_data = ds[var_name].values - ds_mmf_ref[var_name].values
+                    #averaged_year_data = year_data.mean(axis=(1,2))
+                    months = np.arange(1, 13)
+                    
+                    #total_weight_sliced = total_weight[:12, :, :]
+                    
+                    #weighted_year_data = year_data.mean(axis=(1,2)) * total_weight_sliced
+                    
+                    
+                    # --- Plot variable over time if possible ---
 
-                plt.figure(figsize=(8, 4))
-                plt.plot(months, year_data, marker='o', linewidth=1)
-                plt.title(f"{name.upper()} - {var_name} over time")
-                plt.xlabel("Time")
-                plt.ylabel(var_name)
-                plt.tight_layout()
+                    plt.figure(figsize=(8, 4))
+                    plt.plot(months, year_data, marker='o', linewidth=1)
+                    plt.title(f"{name.upper()} - {var_name} over time")
+                    plt.xlabel("Time")
+                    plt.ylabel(var_name)
+                    plt.tight_layout()
 
-                plot_path = f"./figure/{name}_{var_name}.png"
-                plt.savefig(plot_path, dpi=150)
-                plt.close()
+                    plot_path = f"./figure/{name}_{var_name}.png"
+                    plt.savefig(plot_path, dpi=150)
+                    plt.close()
 
-        # Process each dataset
-        #process_dataset(ds_mmf_ref, "mmf_ref")
-        process_dataset(ds_mmf_a, "mmf_a")
-        process_dataset(ds_nn, "nn")
+            # Process each dataset
+            #process_dataset(ds_mmf_ref, "mmf_ref")
+            process_dataset(ds_mmf_a, "mmf_a")
+            process_dataset(ds_nn, "nn")
         
     '''with open(output_path, "w") as f:
         f.write("=== MMF REF means ===\n")
