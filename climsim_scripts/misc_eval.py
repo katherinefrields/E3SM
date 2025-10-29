@@ -31,7 +31,22 @@ def main(shared_path, hybrid_path_h0):
             
             def process_dataset(ds, name):
                 f.write(f"\n=== {name.upper()} means ===\n")
+                # --- Compute and write mean ---
+                #mean_val = var.mean().compute().item()
+                f.write(f"{name} {var_name}: {mean_val}\n")
 
+                l.write(f'ds var name {ds[var_name].shape}\n')
+                l.write(f'ds ref var name {ds_mmf_ref[var_name].shape}\n')
+                
+                monthly_ref_mean = ds_mmf_ref.mean(dim=['lev', 'ncol'])
+                l.write(f'monthly ref mean shape {monthly_ref_mean.dims}\n')
+                
+                monthly_nn_mean = ds.mean(dim=['lev', 'ncol'])
+                
+                year_data = monthly_nn_mean - monthly_ref_mean
+                #averaged_year_data = year_data.mean(axis=(1,2))
+                months = np.arange(1, 13)
+                    
                 for var_name in ds.data_vars:
                     var = ds[var_name]
                     l.write(f'{ds.dims}\n')
@@ -40,21 +55,6 @@ def main(shared_path, hybrid_path_h0):
                     if not np.issubdtype(var.dtype, np.number):
                         continue
 
-                    # --- Compute and write mean ---
-                    mean_val = var.mean().compute().item()
-                    f.write(f"{name} {var_name}: {mean_val}\n")
-
-                    l.write(f'ds var name {ds[var_name].shape}\n')
-                    l.write(f'ds ref var name {ds_mmf_ref[var_name].shape}\n')
-                    
-                    monthly_ref_mean = ds_mmf_ref.mean(dim=['lev', 'ncol'])
-                    l.write(f'monthly ref mean shape {monthly_ref_mean.dims}\n')
-                    
-                    monthly_nn_mean = ds[var_name].mean(dim=['lev', 'ncol'])
-                    
-                    year_data = monthly_nn_mean - monthly_ref_mean
-                    #averaged_year_data = year_data.mean(axis=(1,2))
-                    months = np.arange(1, 13)
                     
                     #total_weight_sliced = total_weight[:12, :, :]
                     
@@ -62,9 +62,10 @@ def main(shared_path, hybrid_path_h0):
                     
                     
                     # --- Plot variable over time if possible ---
-
+                    l.write(f'{year_data[var_name].shape}\n')
+                    
                     plt.figure(figsize=(8, 4))
-                    plt.plot(months, year_data, marker='o', linewidth=1)
+                    plt.plot(months, year_data[var_name], marker='o', linewidth=1)
                     plt.title(f"{name.upper()} - {var_name} over time")
                     plt.xlabel("Time")
                     plt.ylabel(var_name)
