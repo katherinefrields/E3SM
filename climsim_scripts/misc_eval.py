@@ -28,12 +28,14 @@ def main(shared_path, hybrid_path_h0):
 
     with open(output_path, "w") as f:
         with open(log_output_path, "w") as l:
+            
             def process_dataset(ds, name):
                 f.write(f"\n=== {name.upper()} means ===\n")
 
                 for var_name in ds.data_vars:
                     var = ds[var_name]
-
+                    l.write(f'{ds.dims}\n')
+                    
                     # Skip non-numeric variables
                     if not np.issubdtype(var.dtype, np.number):
                         continue
