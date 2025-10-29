@@ -46,7 +46,11 @@ def main(shared_path, hybrid_path_h0):
 
                     l.write(f'ds var name {ds[var_name].shape}\n')
                     l.write(f'ds ref var name {ds_mmf_ref[var_name].shape}\n')
-                    year_data = ds[var_name].values - ds_mmf_ref[var_name].values
+                    
+                    monthly_ref_mean = ds_mmf_ref[var_name].mean(dim=('lev', 'ncol'))
+                    monthly_nn_mean = ds[var_name].mean(dim=('lev', 'ncol'))
+                    
+                    year_data = monthly_nn_mean - monthly_ref_mean
                     #averaged_year_data = year_data.mean(axis=(1,2))
                     months = np.arange(1, 13)
                     
