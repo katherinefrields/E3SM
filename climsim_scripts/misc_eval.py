@@ -38,19 +38,21 @@ def main(shared_path, hybrid_path_h0):
                 #l.write(f'ds var name {ds[var_name].shape}\n')
                 #l.write(f'ds ref var name {ds_mmf_ref[var_name].shape}\n')
                 
-                monthly_ref_mean = ds_mmf_ref.mean(dim=['lev', 'ncol'])
-                l.write(f'monthly ref mean shape {monthly_ref_mean.dims}\n')
+                bias= ds - ds_mmf_ref
+                monthly_bias = bias.mean(dim=['lev', 'ncol'])
+                #monthly_ref_mean = ds_mmf_ref.mean(dim=['lev', 'ncol'])
+                l.write(f'monthly bias mean shape {monthly_bias.dims}\n')
                 
-                monthly_nn_mean = ds.mean(dim=['lev', 'ncol'])
+                #monthly_nn_mean = ds.mean(dim=['lev', 'ncol'])
                 
                 #year_data = monthly_nn_mean - monthly_ref_mean
                 #averaged_year_data = year_data.mean(axis=(1,2))
                 months = np.arange(1, 13)
                 
-                l.write(f'year variable data {monthly_nn_mean.data_vars}\n')
+                #l.write(f'year variable data {monthly_bias.data_vars}\n')
                 
                 for var_name in ['CLDICE', 'CLDLIQ', 'T', 'Q', 'PS', 'U', 'V']:
-                    var = monthly_nn_mean[var_name]
+                    var = monthly_bias[var_name]
                     l.write(f'{ds.dims}\n')
                     
                     # Skip non-numeric variables
@@ -64,10 +66,10 @@ def main(shared_path, hybrid_path_h0):
                     
                     
                     # --- Plot variable over time if possible ---
-                    l.write(f'variable data for {var_name}: {monthly_nn_mean[var_name]}\n')
+                    l.write(f'variable data for {var_name}: {monthly_bias[var_name]}\n')
                     
                     plt.figure(figsize=(8, 4))
-                    plt.plot(months, monthly_nn_mean[var_name], marker='o', linewidth=1)
+                    plt.plot(months, monthly_bias[var_name], marker='o', linewidth=1)
                     plt.title(f"{name.upper()} - {var_name} over time")
                     plt.xlabel("Time")
                     plt.ylabel(var_name)
@@ -80,7 +82,7 @@ def main(shared_path, hybrid_path_h0):
             # Process each dataset
             #process_dataset(ds_mmf_ref, "mmf_ref")
             process_dataset(ds_mmf_a, "mmf_a")
-            #process_dataset(ds_mmf_a, "mmf_b")
+            process_dataset(ds_mmf_a, "mmf_b")
             process_dataset(ds_nn, "nn")
         
     '''with open(output_path, "w") as f:
