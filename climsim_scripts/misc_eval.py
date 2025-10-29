@@ -64,7 +64,7 @@ def main(shared_path, hybrid_path_h0):
                     
                     
                     # --- Plot variable over time if possible ---
-                    l.write(f'variable data for {var_name}: {year_data[var_name].shape}\n')
+                    l.write(f'variable data for {var_name}: {year_data[var_name]}\n')
                     
                     plt.figure(figsize=(8, 4))
                     plt.plot(months, year_data[var_name], marker='o', linewidth=1)
