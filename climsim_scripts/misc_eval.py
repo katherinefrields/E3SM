@@ -46,9 +46,11 @@ def main(shared_path, hybrid_path_h0):
                 year_data = monthly_nn_mean - monthly_ref_mean
                 #averaged_year_data = year_data.mean(axis=(1,2))
                 months = np.arange(1, 13)
-                    
-                for var_name in ds.data_vars:
-                    var = ds[var_name]
+                
+                l.write(f'year variable data {year_data.data_vars}\n')
+                
+                for var_name in year_data.data_vars:
+                    var = year_data[var_name]
                     l.write(f'{ds.dims}\n')
                     
                     # Skip non-numeric variables
@@ -62,7 +64,7 @@ def main(shared_path, hybrid_path_h0):
                     
                     
                     # --- Plot variable over time if possible ---
-                    l.write(f'{year_data[var_name].shape}\n')
+                    l.write(f'variable data for {var_name}: {year_data[var_name].shape}\n')
                     
                     plt.figure(figsize=(8, 4))
                     plt.plot(months, year_data[var_name], marker='o', linewidth=1)
