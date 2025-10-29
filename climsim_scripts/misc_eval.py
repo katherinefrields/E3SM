@@ -49,7 +49,7 @@ def main(shared_path, hybrid_path_h0):
                 
                 l.write(f'year variable data {year_data.data_vars}\n')
                 
-                for var_name in year_data.data_vars:
+                for var_name in ['CLDICE,' 'CLDLIQ', 'T', 'Q', 'PS', 'U', 'V']:
                     var = year_data[var_name]
                     l.write(f'{ds.dims}\n')
                     
