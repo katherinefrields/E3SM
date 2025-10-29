@@ -2,7 +2,7 @@
 #SBATCH -A m4334
 #SBATCH -C cpu
 #SBATCH -q regular
-#SBATCH -t 08:00:00
+#SBATCH -t 02:00:00
 #SBATCH --ntasks-per-node 32
 #SBATCH --cpus-per-task 1
 #SBATCH --mem=128G 
