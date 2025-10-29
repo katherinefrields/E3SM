@@ -48,7 +48,7 @@ def main(shared_path, hybrid_path_h0):
                     l.write(f'ds ref var name {ds_mmf_ref[var_name].shape}\n')
                     
                     monthly_ref_mean = ds_mmf_ref.mean(dim=['lev', 'ncol'])
-                    l.write(f'monthly ref mean shape {monthly_ref_mean.shape}\n')
+                    l.write(f'monthly ref mean shape {monthly_ref_mean.dims}\n')
                     
                     monthly_nn_mean = ds[var_name].mean(dim=['lev', 'ncol'])
                     
