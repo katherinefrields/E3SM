@@ -1,8 +1,8 @@
 #!/bin/bash
 #SBATCH -A m4334
 #SBATCH -C cpu
-#SBATCH -q regular
-#SBATCH -t 06:00:00
+#SBATCH -q debug
+#SBATCH -t 00:30:00
 #SBATCH --ntasks-per-node 32
 #SBATCH --cpus-per-task 1
 #SBATCH --mem=128G 
@@ -21,6 +21,6 @@ podman-hpc run  --rm -it --volume="/pscratch/sd/k/kfrields/climsim-online-data/i
     --volume "/pscratch/sd/k/kfrields/climsim-online-data/scratch:/scratch" \
     --volume "/pscratch/sd/k/kfrields/hugging/E3SM-MMF_saved_models:/hugging" \
     --volume "/dev/shm:/dev/shm" \
-    --volume "/global/homes/k/kfrields/climsim:/climsim"\
+    --volume "/global/homes/k/kfrields/climsim-kaggle-edition:/climsim"\
     climsim:2.0 python E3SM/climsim_scripts/example_job_submit_nnwrapper_v2.py
 
