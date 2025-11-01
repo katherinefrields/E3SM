@@ -12,7 +12,7 @@ newcase,config,build,clean,submit,continue_run = False,False,False,False,False,F
 
 acct = os.environ.get("MMF_NN_SLURM_ACCOUNT", "m4334")
 
-case_prefix = '1_epoch_strato_full_Unet_v2_rh_mc_scalar'
+case_prefix = 'strato_full_Unet_v2_rh_mc_scalar'
 # exe_refcase = ''
 
 top_dir  = "/climsim"
@@ -67,7 +67,7 @@ if debug_mode: case_list.append('debug')
 case='.'.join(case_list)
 #---------------------------------------------------------------------------------------------------
 # MMF_NN_EMULATOR
-torch_model = '/hugging/wrapped_unet_full_v2_rh_mc_deterministic_dataset_fix_3.pt/wrapped_unet_full_v2_rh_mc_deterministic_dataset_fix_3.pt'
+torch_model = '/hugging/unet_full_v2_rh_mc_deterministic_dataset_fix_3/wrapped_unet_full_v2_rh_mc_deterministic_dataset_fix_3.pt'
 inputlength = 557
 outputlength = 368
 cb_nn_var_combo = 'v2'
