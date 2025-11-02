@@ -67,7 +67,7 @@ if debug_mode: case_list.append('debug')
 case='.'.join(case_list)
 #---------------------------------------------------------------------------------------------------
 # MMF_NN_EMULATOR
-torch_model = '/hugging/unet_seed_7/wrapped_model.pt'
+torch_model = '/hugging/unet_seed_7/wrapped_model_cpu.pt'
 inputlength = 557
 outputlength = 368
 cb_nn_var_combo = 'v2'
