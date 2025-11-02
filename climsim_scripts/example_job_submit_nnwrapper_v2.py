@@ -12,7 +12,7 @@ newcase,config,build,clean,submit,continue_run = False,False,False,False,False,F
 
 acct = os.environ.get("MMF_NN_SLURM_ACCOUNT", "m4334")
 
-case_prefix = 'climsim3_Unet_v2_rh_mc'
+case_prefix = 'climsim3_Unet_v2_rh_mc_full_online'
 # exe_refcase = ''
 
 top_dir  = "/climsim"

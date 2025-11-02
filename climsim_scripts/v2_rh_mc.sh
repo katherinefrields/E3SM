@@ -1,10 +1,10 @@
 #!/bin/bash
 #SBATCH -A m4334
 #SBATCH -C cpu
-#SBATCH -q debug
-#SBATCH -t 00:30:00
+#SBATCH -q regular
+#SBATCH -t 06:00:00
 #SBATCH --ntasks-per-node 32
-#SBATCH --cpus-per-task 1
+#SBATCH --cpus-per-task 2
 #SBATCH --mem=128G 
 #SBATCH --mail-user=frieldskatherine@gmail.com
 #SBATCH --mail-type=ALL
