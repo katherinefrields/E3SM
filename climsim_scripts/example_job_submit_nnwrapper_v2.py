@@ -15,7 +15,7 @@ acct = os.environ.get("MMF_NN_SLURM_ACCOUNT", "m4334")
 case_prefix = 'climsim3_Unet_v2_rh_mc'
 # exe_refcase = ''
 
-top_dir  = "/climsim-kaggle-edition"
+top_dir  = "/climsim"
 case_dir = '/scratch/'
 src_dir  = top_dir+'/E3SM/' 
 # user_cpp = '-DMMF_ML_TRAINING' # for saving ML variables
