@@ -12,7 +12,7 @@ import shutil, glob
 
 acct = 'm4334'
 
-case_prefix = 'test_case'
+case_prefix = 'test_case_2'
 # exe_refcase = 'ftorch_test'
 # Added extra physics_state and cam_out variables.
 
@@ -71,8 +71,9 @@ if debug_mode: case_list.append('debug')
 case='.'.join(case_list)
 #---------------------------------------f------------------------------------------------------------
 # MMF_NN_EMULATOR
-torch_model = '/storage/hugging/E3SM-MMF_saved_models/diffusion_models/wrap_testing/wrapped_unet_model.pt'
-
+torch_model = '/storage/shared_e3sm/saved_models/wrapper/wrapped_unet_model.pt'
+#torch_model = '/storage/hugging/E3SM-MMF_saved_models/diffusion_models/wrap_testing/wrapped_unet_model.pt'
+#/storage/shared_e3sm/saved_models/wrapper
 inputlength = 557
 outputlength = 368
 cb_nn_var_combo = 'v2'
@@ -103,8 +104,9 @@ if newcase :
    case_scripts_dir=f'{case_dir}/{case}' 
    if os.path.isdir(f'{case_dir}/{case}'): exit('\n'+clr.RED+f'This case already exists: \n{case_dir}/{case}'+clr.END+'\n')
    cmd = f'{src_dir}/cime/scripts/create_newcase -case {case} --script-root {case_scripts_dir} -compset {compset} -res {grid}  '
-   if arch=='GNUCPU' : cmd += f' -mach docker-climsim -compiler gnu    -pecount {atm_ntasks}x{atm_nthrds} '
-   if arch=='GNUGPU' : cmd += f' -mach docker-climsim -compiler gnugpu -pecount {atm_ntasks}x{atm_nthrds} '
+   # changed from docker-climsim to pm-cpu
+   if arch=='GNUCPU' : cmd += f' -mach pm-cpu -compiler gnu    -pecount {atm_ntasks}x{atm_nthrds} '
+   if arch=='GNUGPU' : cmd += f' -mach pm-cpu -compiler gnugpu -pecount {atm_ntasks}x{atm_nthrds} '
    run_cmd(cmd)
 os.chdir(f'{case_scripts_dir}')
 if newcase :
