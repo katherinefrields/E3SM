@@ -18,7 +18,7 @@ case_prefix = 'test_case'
 
 top_dir  = "/climsim"
 case_dir = '/scratch/hugging/'
-case_dir = f'{scratch_dir}/hugging/E3SM-MMF-online-runs'
+#case_dir = f'{scratch_dir}/hugging/E3SM-MMF-online-runs'
 src_dir  = top_dir+'/E3SM/' # branch => whannah/mmf/ml-training
 #user_cpp = '-DMMF_ML_TRAINING' # for saving ML variables
 # user_cpp = '-DMMF_NN_EMULATOR -DMMF_NN_EMULATOR_DIAG_PARTIAL -DMMF_NN_EMULATORDEBUG -DTORCH_MMF_NN_EMULATOR_TEST' # NN hybrid test
