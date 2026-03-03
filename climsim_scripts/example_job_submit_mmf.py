@@ -12,7 +12,7 @@ newcase,config,build,clean,submit,continue_run = False,False,False,False,False,F
 
 acct = os.environ.get("MMF_NN_SLURM_ACCOUNT", "m4334")
 
-case_prefix = 'example_job_submit_mmf'
+case_prefix = 'example_job_submit_mmf_test_100'
 # exe_refcase = ''
 
 top_dir  = "/climsim"
