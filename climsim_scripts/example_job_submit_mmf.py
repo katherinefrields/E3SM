@@ -10,12 +10,12 @@ import os, datetime, subprocess as sp, numpy as np
 import shutil, glob
 newcase,config,build,clean,submit,continue_run = False,False,False,False,False,False
 
-acct = os.environ.get("MMF_NN_SLURM_ACCOUNT", "m4334")
+acct = os.environ.get("MMF_NN_SLURM_ACCOUNT", "m4331")
 
-case_prefix = 'example_job_submit_mmf_test_100'
+case_prefix = 'example_job_submit_mmf'
 # exe_refcase = ''
 
-top_dir  = "/climsim-online"
+top_dir  = "/climsim"
 case_dir = '/scratch/'
 src_dir  = top_dir+'/E3SM/' 
 # user_cpp = '-DMMF_ML_TRAINING' # for saving ML variables
@@ -102,7 +102,7 @@ if newcase :
    if arch=='GNUCPU' : cmd += f' -mach docker-climsim -compiler gnu    -pecount {atm_ntasks}x{atm_nthrds} '
    if arch=='GNUGPU' : cmd += f' -mach docker-climsim -compiler gnugpu -pecount {atm_ntasks}x{atm_nthrds} '
    run_cmd(cmd)
-#os.chdir(f'{case_scripts_dir}')
+os.chdir(f'{case_scripts_dir}')
 if newcase :
    case_build_dir=f'{case_dir}/{case}/build'
    case_run_dir=f'{case_dir}/{case}/run'
