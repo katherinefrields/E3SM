@@ -10,7 +10,7 @@ import os, datetime, subprocess as sp, numpy as np
 import shutil, glob
 newcase,config,build,clean,submit,continue_run = False,False,False,False,False,False
 
-acct = os.environ.get("MMF_NN_SLURM_ACCOUNT", "m4331")
+acct = os.environ.get("MMF_NN_SLURM_ACCOUNT", "m4334")
 
 case_prefix = 'example_job_submit_mmf'
 # exe_refcase = ''
@@ -43,7 +43,7 @@ debug_mode = False
 dtime = 1200 # set to 0 to use a default value 
 
 #stop_opt,stop_n,resub,walltime = 'nmonths',1, 1, '00:30:00'
-stop_opt,stop_n,resub,walltime = 'nmonths',3, 0,'24:00:00'
+stop_opt,stop_n,resub,walltime = 'nmonths',3, 0,'00:05:00'
 #stop_opt,stop_n,resub,walltime = 'ndays',2, 0,'00:30:00'
 
 ne,npg=4,2;  num_nodes=1  ; grid=f'ne{ne}pg{npg}_ne{ne}pg{npg}'
