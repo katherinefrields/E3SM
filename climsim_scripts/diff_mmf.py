@@ -17,7 +17,7 @@ case_prefix = 'test_case_2'
 # Added extra physics_state and cam_out variables.
 
 top_dir  = "/climsim"
-case_dir = '/scratch/hugging/'
+case_dir = '/scratch/'
 #case_dir = f'{scratch_dir}/hugging/E3SM-MMF-online-runs'
 src_dir  = top_dir+'/E3SM/' # branch => whannah/mmf/ml-training
 #user_cpp = '-DMMF_ML_TRAINING' # for saving ML variables
