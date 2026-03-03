@@ -15,7 +15,7 @@ acct = os.environ.get("MMF_NN_SLURM_ACCOUNT", "m4334")
 case_prefix = 'example_job_submit_mmf_test_100'
 # exe_refcase = ''
 
-top_dir  = "/climsim"
+top_dir  = "/climsim-online"
 case_dir = '/scratch/'
 src_dir  = top_dir+'/E3SM/' 
 # user_cpp = '-DMMF_ML_TRAINING' # for saving ML variables
