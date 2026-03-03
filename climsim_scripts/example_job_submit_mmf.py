@@ -10,9 +10,9 @@ import os, datetime, subprocess as sp, numpy as np
 import shutil, glob
 newcase,config,build,clean,submit,continue_run = False,False,False,False,False,False
 
-acct = os.environ.get("MMF_NN_SLURM_ACCOUNT", "m4331")
+acct = os.environ.get("MMF_NN_SLURM_ACCOUNT", "m4334")
 
-case_prefix = 'example_job_submit_mmf'
+case_prefix = 'example_job_submit_mmf_2'
 # exe_refcase = ''
 
 top_dir  = "/climsim"
